@@ -1,15 +1,17 @@
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from './useAuth'
+import { MOCK_MODE, MOCK_LEADERBOARD, MOCK_LEADERBOARD_RANK } from '@/lib/mockData'
 
 export function useLeaderboard(limit = 20) {
   const { user } = useAuth()
-  const [board, setBoard] = useState([])
-  const [myRank, setMyRank] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [board, setBoard] = useState(MOCK_MODE ? MOCK_LEADERBOARD : [])
+  const [myRank, setMyRank] = useState(MOCK_MODE ? MOCK_LEADERBOARD_RANK : null)
+  const [loading, setLoading] = useState(!MOCK_MODE)
   const [error, setError] = useState(null)
 
   const fetchLeaderboard = useCallback(async () => {
+    if (MOCK_MODE) return
     setLoading(true)
     setError(null)
     const { data, error: err } = await supabase.rpc('get_leaderboard', { p_limit: limit })
@@ -26,6 +28,7 @@ export function useLeaderboard(limit = 20) {
 
   // Realtime: re-fetch when any profile XP changes
   useEffect(() => {
+    if (MOCK_MODE) return
     const channel = supabase
       .channel('leaderboard-realtime')
       .on(

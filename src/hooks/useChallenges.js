@@ -1,15 +1,17 @@
 import { useState, useEffect, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from './useAuth'
+import { MOCK_MODE, MOCK_CHALLENGES, MOCK_CHALLENGE_PROGRESS } from '@/lib/mockData'
 
 export function useChallenges() {
   const { user } = useAuth()
-  const [challenges, setChallenges] = useState([])
-  const [progress, setProgress] = useState({})
-  const [loading, setLoading] = useState(true)
+  const [challenges, setChallenges] = useState(MOCK_MODE ? MOCK_CHALLENGES : [])
+  const [progress, setProgress] = useState(MOCK_MODE ? MOCK_CHALLENGE_PROGRESS : {})
+  const [loading, setLoading] = useState(!MOCK_MODE)
   const [error, setError] = useState(null)
 
   const fetchData = useCallback(async () => {
+    if (MOCK_MODE) return
     if (!user?.id) return
     setLoading(true)
     setError(null)

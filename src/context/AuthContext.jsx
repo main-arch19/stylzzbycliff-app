@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState, useCallback } from 'react'
 import { supabase } from '@/lib/supabase'
+import { MOCK_MODE, MOCK_USER, MOCK_PROFILE } from '@/lib/mockData'
 
 const AuthContext = createContext(null)
 
@@ -19,6 +20,13 @@ export function AuthProvider({ children }) {
   }, [])
 
   useEffect(() => {
+    if (MOCK_MODE) {
+      setUser(MOCK_USER)
+      setProfile(MOCK_PROFILE)
+      setLoading(false)
+      return
+    }
+
     // Get initial session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setUser(session?.user ?? null)
