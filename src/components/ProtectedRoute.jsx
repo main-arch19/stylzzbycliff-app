@@ -16,13 +16,14 @@ export function ProtectedRoute({ children, requireRole }) {
     )
   }
 
-  if (!user) {
-    return <Navigate to="/login" state={{ from: location }} replace />
-  }
+  // PAUSED — uncomment to restore login requirement
+  // if (!user) {
+  //   return <Navigate to="/login" state={{ from: location }} replace />
+  // }
 
-  if (requireRole && profile?.role !== requireRole && profile?.role !== 'admin') {
-    return <Navigate to="/" replace />
-  }
+  // if (requireRole && profile?.role !== requireRole && profile?.role !== 'admin') {
+  //   return <Navigate to="/" replace />
+  // }
 
   return children
 }
