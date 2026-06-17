@@ -11,6 +11,7 @@ import { SpinWheel } from '@/components/SpinWheel'
 import { ChallengeCard, ChallengeCardSkeleton } from '@/components/ChallengeCard'
 import { CutHistoryRow, CutHistoryRowSkeleton } from '@/components/CutHistoryRow'
 import { GameLevelCard } from '@/components/GameLevelCard'
+import ThemeToggle from '@/components/ThemeToggle'
 
 export default function Home() {
   const { profile } = useAuth()
@@ -30,11 +31,14 @@ export default function Home() {
   return (
     <div className="scroll-container pb-28">
       {/* Header */}
-      <div className="px-4 pt-6 pb-2 bg-midnight sticky top-0 z-10 border-b border-white/5">
-        <div className="font-body text-[11px] text-warm-grey">{greeting()}</div>
-        <div className="font-display text-[28px] text-white uppercase tracking-wider leading-tight">
-          {profile?.username || 'King'}
+      <div className="px-4 pt-6 pb-2 bg-midnight sticky top-0 z-10 border-b border-white/5 flex items-start justify-between gap-3">
+        <div>
+          <div className="font-body text-[11px] text-warm-grey">{greeting()}</div>
+          <div className="font-display text-[28px] text-white uppercase tracking-wider leading-tight">
+            {profile?.username || 'King'}
+          </div>
         </div>
+        <ThemeToggle className="mt-1" />
       </div>
 
       <div className="px-4 space-y-4 pt-4">

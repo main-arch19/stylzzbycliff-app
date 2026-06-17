@@ -75,21 +75,24 @@ export default function SubmitCut() {
   return (
     <div className="scroll-container pb-28">
       {/* Header */}
-      <div className="px-4 pt-6 pb-3 bg-midnight sticky top-0 z-10 border-b border-white/5 flex items-center gap-3">
-        <button
-          onClick={() => navigate(-1)}
-          className="text-warm-grey hover:text-white transition-colors"
-        >
-          <ArrowLeft size={20} />
-        </button>
-        <div>
-          <div className="font-display text-[24px] text-white uppercase tracking-wider leading-none">
-            SUBMIT A CUT
-          </div>
-          <div className="font-body text-[10px] text-warm-grey mt-0.5">
-            Submit your visit — we'll verify and credit your count.
+      <div className="px-4 pt-6 pb-3 bg-midnight sticky top-0 z-10 border-b border-white/5 flex items-center gap-3 justify-between">
+        <div className="flex items-center gap-3 min-w-0">
+          <button
+            onClick={() => navigate(-1)}
+            className="text-warm-grey hover:text-white transition-colors"
+          >
+            <ArrowLeft size={20} />
+          </button>
+          <div>
+            <div className="font-display text-[24px] text-white uppercase tracking-wider leading-none">
+              SUBMIT A CUT
+            </div>
+            <div className="font-body text-[10px] text-warm-grey mt-0.5">
+              Submit your visit — we'll verify and credit your count.
+            </div>
           </div>
         </div>
+        <ThemeToggle />
       </div>
 
       <div className="px-4 pt-5 space-y-6">

@@ -47,9 +47,12 @@ export default function Profile() {
       {/* Header */}
       <div className="px-4 pt-6 pb-4 bg-midnight sticky top-0 z-10 border-b border-white/5 flex items-center justify-between">
         <h1 className="font-display text-[28px] text-white uppercase tracking-wider">PROFILE</h1>
-        <button onClick={() => setShowSettings(!showSettings)} className="text-warm-grey hover:text-white transition-colors">
-          <Settings size={20} />
-        </button>
+        <div className="flex items-center gap-2">
+          <ThemeToggle />
+          <button onClick={() => setShowSettings(!showSettings)} className="text-warm-grey hover:text-white transition-colors">
+            <Settings size={20} />
+          </button>
+        </div>
       </div>
 
       <div className="px-4 space-y-5 pt-4">
@@ -148,6 +151,29 @@ export default function Profile() {
                     {saving ? '...' : 'SAVE'}
                   </button>
                 </div>
+              </div>
+
+              <div className="divider" />
+
+              <div className="flex items-center justify-between">
+                <div>
+                  <div className="section-header mb-1">Appearance</div>
+                  <div className="font-body text-[9px] text-warm-grey">
+                    {isLight ? 'Light mode' : 'Dark mode'}
+                  </div>
+                </div>
+                <button
+                  onClick={toggleTheme}
+                  role="switch"
+                  aria-checked={isLight}
+                  className="relative w-12 h-7 rounded-pill border border-line/15 bg-line/5 transition-colors"
+                >
+                  <span
+                    className={`absolute top-0.5 left-0.5 w-6 h-6 rounded-full flex items-center justify-center bg-clipper-red text-white transition-transform ${isLight ? 'translate-x-5' : ''}`}
+                  >
+                    {isLight ? <Sun size={13} /> : <Moon size={13} />}
+                  </span>
+                </button>
               </div>
 
               <div className="divider" />

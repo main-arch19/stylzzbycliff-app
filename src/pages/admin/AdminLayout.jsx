@@ -54,6 +54,7 @@ export default function AdminLayout() {
           <span className="font-body text-[10px] text-warm-grey hidden sm:block">
             {profile?.username}
           </span>
+          <ThemeToggle />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             className="text-warm-grey hover:text-white transition-colors md:hidden"

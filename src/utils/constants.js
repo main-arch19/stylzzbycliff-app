@@ -97,6 +97,22 @@ export const HAIRCUT_STYLES = [
   'Custom Style',
 ]
 
+// ─── Common Beard Styles ──────────────────────────────────────────
+export const BEARD_STYLES = [
+  'Clean Shave',
+  'Stubble',
+  'Short Beard',
+  'Full Beard',
+  'Goatee',
+  'Van Dyke',
+  'Beard Fade',
+  'Mustache',
+  'Chin Strap',
+  'Anchor',
+  'Circle Beard',
+  'Ducktail',
+]
+
 // ─── Brand Colors ─────────────────────────────────────────────────
 export const COLORS = {
   clipperRed: '#C0392B',

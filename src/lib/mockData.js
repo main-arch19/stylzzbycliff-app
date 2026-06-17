@@ -35,6 +35,21 @@ export const MOCK_PROFILE = {
   role: 'customer',
   decay_periods_applied: 0,
   avatar_url: null,
+  style_dna_haircut: 'Skin Fade',
+  style_dna_beard: 'Full Beard',
+}
+
+// ─── Style DNA breakdown (cut-history analytics) ──────────────────
+export const MOCK_STYLE_DNA = {
+  styles: [
+    { style: 'Skin Fade',  count: 8, percentage: 47 },
+    { style: 'Taper Fade', count: 5, percentage: 29 },
+    { style: 'Line Up',    count: 3, percentage: 18 },
+    { style: 'Buzz Cut',   count: 1, percentage: 6 },
+  ],
+  total: 17,
+  unique_styles: 4,
+  favorite_barber: 'Cliff',
 }
 
 // ─── Cuts ─────────────────────────────────────────────────────────

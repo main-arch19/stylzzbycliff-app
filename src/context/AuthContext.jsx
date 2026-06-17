@@ -72,6 +72,11 @@ export function AuthProvider({ children }) {
   }
 
   const updateProfile = async (updates) => {
+    if (MOCK_MODE) {
+      let next = null
+      setProfile((prev) => { next = prev ? { ...prev, ...updates } : prev; return next })
+      return { data: next, error: null }
+    }
     if (!user) return { error: new Error('Not authenticated') }
     const { data, error } = await supabase
       .from('profiles')

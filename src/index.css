@@ -4,6 +4,14 @@
 
 /* ─── Brand CSS Custom Properties ─────────────────────────────── */
 :root {
+  /* Theme-aware channels (space-separated RGB, consumed via rgb(var(--c-*) / a)) */
+  --c-bg: 17 17 17;        /* #111111 page background */
+  --c-surface: 30 30 30;   /* #1E1E1E cards / inputs */
+  --c-surface-2: 42 42 42; /* #2A2A2A hover / nested surface */
+  --c-text: 242 239 234;   /* #F2EFEA primary text */
+  --c-text-muted: 107 101 96; /* #6B6560 secondary text */
+  --c-line: 255 255 255;   /* hairline / overlay base */
+
   /* Colors */
   --color-primary: #1A1A1A;
   --color-secondary: #C0392B;
@@ -40,6 +48,19 @@
   --gradient-red-gold: linear-gradient(90deg, #C0392B, #D4A03C);
 }
 
+/* ─── Light theme overrides ────────────────────────────────────── */
+[data-theme="light"] {
+  --c-bg: 242 239 234;     /* #F2EFEA cream page background */
+  --c-surface: 255 255 255;/* #FFFFFF cards / inputs */
+  --c-surface-2: 233 228 220; /* slightly tinted nested surface */
+  --c-text: 26 26 26;      /* #1A1A1A primary text */
+  --c-text-muted: 107 101 96; /* #6B6560 reads on light too */
+  --c-line: 26 26 26;      /* dark hairline / overlay base */
+
+  --color-surface-dark: #FFFFFF;
+  --color-text-primary: #1A1A1A;
+}
+
 /* ─── Base Reset ───────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;
@@ -53,14 +74,15 @@ html {
 
 body {
   margin: 0;
-  background-color: var(--color-bg-dark);
-  color: var(--color-text-primary);
+  background-color: rgb(var(--c-bg));
+  color: rgb(var(--c-text));
   font-family: var(--font-body);
   font-size: 11px;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 #root {
@@ -157,34 +179,34 @@ body {
 .btn-primary:hover:not(:disabled) { filter: brightness(1.1); }
 
 .btn-secondary {
-  background: var(--color-primary);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.1);
+  background: rgb(var(--c-surface-2));
+  color: rgb(var(--c-text));
+  border: 1px solid rgba(var(--c-line) / 0.12);
 }
-.btn-secondary:hover:not(:disabled) { background: #2a2a2a; }
+.btn-secondary:hover:not(:disabled) { filter: brightness(1.08); }
 
 .btn-premium {
   background: var(--gradient-gold);
-  color: var(--color-primary);
+  color: #1A1A1A;
 }
 .btn-premium:hover:not(:disabled) { filter: brightness(1.1); }
 
 .btn-ghost {
   background: transparent;
-  color: #fff;
-  border: 1.5px solid rgba(255,255,255,0.3);
+  color: rgb(var(--c-text));
+  border: 1.5px solid rgba(var(--c-line) / 0.3);
 }
-.btn-ghost:hover:not(:disabled) { border-color: rgba(255,255,255,0.6); }
+.btn-ghost:hover:not(:disabled) { border-color: rgba(var(--c-line) / 0.6); }
 
 /* ─── Input Component ──────────────────────────────────────────── */
 .input {
   width: 100%;
   height: var(--input-height);
   padding: 0 16px;
-  background: var(--color-surface-dark);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgb(var(--c-surface));
+  border: 1px solid rgba(var(--c-line) / 0.08);
   border-radius: var(--radius-sm);
-  color: var(--color-text-primary);
+  color: rgb(var(--c-text));
   font-family: var(--font-body);
   font-size: 14px;
   transition: border-color 0.2s ease;
@@ -196,9 +218,9 @@ body {
 
 /* ─── Card Component ───────────────────────────────────────────── */
 .card {
-  background: var(--color-surface-dark);
+  background: rgb(var(--c-surface));
   border-radius: var(--radius);
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgba(var(--c-line) / 0.05);
   overflow: hidden;
 }
 
@@ -228,7 +250,7 @@ body {
 /* ─── Scrollbar ────────────────────────────────────────────────── */
 ::-webkit-scrollbar { width: 4px; height: 4px; }
 ::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+::-webkit-scrollbar-thumb { background: rgba(var(--c-line) / 0.1); border-radius: 2px; }
 
 /* ─── Smooth scrolling container ──────────────────────────────── */
 .scroll-container {
@@ -245,7 +267,7 @@ body {
 .progress-track {
   width: 100%;
   height: 6px;
-  background: rgba(255,255,255,0.08);
+  background: rgba(var(--c-line) / 0.08);
   border-radius: 3px;
   overflow: hidden;
 }
@@ -265,7 +287,7 @@ body {
 .divider {
   width: 100%;
   height: 1px;
-  background: rgba(255,255,255,0.06);
+  background: rgba(var(--c-line) / 0.06);
 }
 
 /* ─── Section header ────────────────────────────────────────────── */
