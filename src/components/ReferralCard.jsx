@@ -35,7 +35,7 @@ export function ReferralCard({ referralCode }) {
 
   return (
     <div className="card p-5">
-      <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white mb-1">
+      <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream mb-1">
         REFERRAL PROGRAM
       </div>
       <div className="font-body text-[10px] text-warm-grey mb-4">

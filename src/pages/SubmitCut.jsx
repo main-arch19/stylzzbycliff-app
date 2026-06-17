@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { ArrowLeft, Camera, X, Check, Clock, AlertCircle, Upload } from 'lucide-react'
 import { useCutSubmissions } from '@/hooks/useCutSubmissions'
 import { formatDate } from '@/utils/helpers'
+import ThemeToggle from '@/components/ThemeToggle'
 
 const STATUS_STYLES = {
   pending:  { bg: 'rgba(230,126,34,0.1)',  border: 'rgba(230,126,34,0.3)',  color: '#E67E22', label: 'PENDING'  },
@@ -75,16 +76,16 @@ export default function SubmitCut() {
   return (
     <div className="scroll-container pb-28">
       {/* Header */}
-      <div className="px-4 pt-6 pb-3 bg-midnight sticky top-0 z-10 border-b border-white/5 flex items-center gap-3 justify-between">
+      <div className="px-4 pt-6 pb-3 bg-midnight sticky top-0 z-10 border-b border-line/5 flex items-center gap-3 justify-between">
         <div className="flex items-center gap-3 min-w-0">
           <button
             onClick={() => navigate(-1)}
-            className="text-warm-grey hover:text-white transition-colors"
+            className="text-warm-grey hover:text-cream transition-colors"
           >
             <ArrowLeft size={20} />
           </button>
           <div>
-            <div className="font-display text-[24px] text-white uppercase tracking-wider leading-none">
+            <div className="font-display text-[24px] text-cream uppercase tracking-wider leading-none">
               SUBMIT A CUT
             </div>
             <div className="font-body text-[10px] text-warm-grey mt-0.5">
@@ -139,7 +140,7 @@ export default function SubmitCut() {
                 <button
                   type="button"
                   onClick={() => fileRef.current?.click()}
-                  className="w-full py-6 rounded-[12px] border border-dashed border-white/15 flex flex-col items-center gap-2 text-warm-grey hover:border-white/30 hover:text-white transition-all"
+                  className="w-full py-6 rounded-[12px] border border-dashed border-line/15 flex flex-col items-center gap-2 text-warm-grey hover:border-line/30 hover:text-cream transition-all"
                 >
                   <Camera size={20} />
                   <span className="font-heading text-[10px] tracking-wider uppercase">TAP TO ADD PHOTO</span>
@@ -196,7 +197,7 @@ export default function SubmitCut() {
             >
               {submitting ? (
                 <>
-                  <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                  <div className="w-4 h-4 border-2 border-line/30 border-t-white rounded-full animate-spin" />
                   SUBMITTING...
                 </>
               ) : (
@@ -212,7 +213,7 @@ export default function SubmitCut() {
         {/* Submission history */}
         <div>
           <div className="section-header mb-3">YOUR SUBMISSIONS</div>
-          <div className="card divide-y divide-white/5">
+          <div className="card divide-y divide-line/5">
             {loading ? (
               [1,2,3].map((i) => (
                 <div key={i} className="p-3 animate-skeleton h-14" />
@@ -234,7 +235,7 @@ export default function SubmitCut() {
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <Clock size={11} className="text-warm-grey" />
-                        <span className="font-heading text-[11px] tracking-wider uppercase text-white">
+                        <span className="font-heading text-[11px] tracking-wider uppercase text-cream">
                           {formatDate(s.cut_date)}
                         </span>
                       </div>

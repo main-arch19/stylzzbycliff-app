@@ -62,7 +62,7 @@ export function CrewCard() {
         <div className="flex items-center gap-3 mb-4">
           <Users size={20} className="text-warm-grey" />
           <div>
-            <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white">YOUR CREW</div>
+            <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream">YOUR CREW</div>
             <div className="font-body text-[10px] text-warm-grey mt-0.5">No crew yet. Start one.</div>
           </div>
         </div>
@@ -92,7 +92,7 @@ export function CrewCard() {
     <div className="card p-5">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <div className="font-display text-[18px] text-white uppercase">{crew.name}</div>
+          <div className="font-display text-[18px] text-cream uppercase">{crew.name}</div>
           <div className="font-body text-[10px] text-warm-grey">{members.length} member{members.length !== 1 ? 's' : ''}</div>
         </div>
         {isCaptain && <span className="badge badge-premium">CAPTAIN</span>}
@@ -102,10 +102,10 @@ export function CrewCard() {
       <div className="space-y-2 mb-4">
         {members.map((m) => (
           <div key={m.id} className="flex items-center gap-2 py-1">
-            <div className="w-7 h-7 rounded-full bg-charcoal border border-white/10 flex items-center justify-center text-[11px] uppercase font-bold text-warm-grey">
+            <div className="w-7 h-7 rounded-full bg-charcoal border border-line/10 flex items-center justify-center text-[11px] uppercase font-bold text-warm-grey">
               {m.profiles?.username?.[0] || '?'}
             </div>
-            <span className="font-heading text-[12px] font-medium tracking-wide uppercase text-white flex-1">
+            <span className="font-heading text-[12px] font-medium tracking-wide uppercase text-cream flex-1">
               {m.profiles?.username}
             </span>
             <span className="font-mono text-[9px] text-accent">{m.profiles?.total_xp?.toLocaleString()} XP</span>

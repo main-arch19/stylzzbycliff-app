@@ -36,7 +36,7 @@ export default function Login() {
         <div className="w-24 h-24 rounded-full bg-charcoal border-2 border-clipper-red/30 flex items-center justify-center mb-4 overflow-hidden">
           <span className="font-display text-[40px] text-clipper-red">S</span>
         </div>
-        <h1 className="font-display text-[42px] text-white tracking-widest uppercase">STYLZZ</h1>
+        <h1 className="font-display text-[42px] text-cream tracking-widest uppercase">STYLZZ</h1>
         <p className="font-heading text-[11px] tracking-[4px] uppercase text-accent mt-1">
           Stay Fresh. Stay Sharp.
         </p>
@@ -70,7 +70,7 @@ export default function Login() {
             <button
               type="button"
               onClick={() => setShowPass(!showPass)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-grey hover:text-white transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-grey hover:text-cream transition-colors"
             >
               {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
@@ -91,7 +91,7 @@ export default function Login() {
         <span className="font-body text-[11px] text-warm-grey">New to Stylzz? </span>
         <Link
           to="/signup"
-          className="font-heading text-[11px] tracking-wider uppercase text-clipper-red hover:text-white transition-colors"
+          className="font-heading text-[11px] tracking-wider uppercase text-clipper-red hover:text-cream transition-colors"
         >
           Create Account
         </Link>

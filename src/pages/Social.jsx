@@ -13,9 +13,9 @@ export default function Social() {
   return (
     <div className="scroll-container pb-28">
       {/* Header */}
-      <div className="px-4 pt-6 pb-4 bg-midnight sticky top-0 z-10 border-b border-white/5 flex items-start justify-between gap-3">
+      <div className="px-4 pt-6 pb-4 bg-midnight sticky top-0 z-10 border-b border-line/5 flex items-start justify-between gap-3">
         <div>
-          <h1 className="font-display text-[28px] text-white uppercase tracking-wider">SOCIAL</h1>
+          <h1 className="font-display text-[28px] text-cream uppercase tracking-wider">SOCIAL</h1>
           <p className="font-body text-[10px] text-warm-grey">Compete, connect, refer. Stay in the game.</p>
         </div>
         <ThemeToggle className="mt-1" />

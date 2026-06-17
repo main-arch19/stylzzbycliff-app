@@ -61,6 +61,20 @@
   --color-text-primary: #1A1A1A;
 }
 
+/* Re-assert dark channels for "always dark" islands nested in light mode
+   (e.g. premium modals, the spin wheel, image scrims). Add data-theme="dark"
+   to any element that must stay dark regardless of the active theme. */
+[data-theme="dark"] {
+  --c-bg: 17 17 17;
+  --c-surface: 30 30 30;
+  --c-surface-2: 42 42 42;
+  --c-text: 242 239 234;
+  --c-text-muted: 107 101 96;
+  --c-line: 255 255 255;
+  --color-surface-dark: #1E1E1E;
+  --color-text-primary: #F2EFEA;
+}
+
 /* ─── Base Reset ───────────────────────────────────────────────── */
 *, *::before, *::after {
   box-sizing: border-box;

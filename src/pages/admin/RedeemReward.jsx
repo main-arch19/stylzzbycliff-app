@@ -55,7 +55,7 @@ export default function RedeemReward() {
 
   return (
     <div className="p-4 max-w-xl">
-      <h1 className="font-display text-[28px] text-white uppercase tracking-wider mb-2">REDEEM REWARDS</h1>
+      <h1 className="font-display text-[28px] text-cream uppercase tracking-wider mb-2">REDEEM REWARDS</h1>
       <p className="font-body text-[10px] text-warm-grey mb-5">Customer presents their claimed reward. Mark it as redeemed.</p>
 
       {/* Search */}
@@ -82,12 +82,12 @@ export default function RedeemReward() {
             <button
               key={c.id}
               onClick={() => handleSelectCustomer(c)}
-              className="w-full flex items-center gap-3 p-3 rounded-[8px] hover:bg-white/5 transition-colors text-left"
+              className="w-full flex items-center gap-3 p-3 rounded-[8px] hover:bg-line/5 transition-colors text-left"
             >
               <div className="w-8 h-8 rounded-full bg-charcoal flex items-center justify-center text-xs font-bold uppercase text-warm-grey shrink-0">
                 {c.username[0]}
               </div>
-              <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white">{c.username}</div>
+              <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream">{c.username}</div>
               <div className="ml-auto font-mono text-[9px] text-warm-grey">{c.total_cuts} cuts</div>
             </button>
           ))}
@@ -99,10 +99,10 @@ export default function RedeemReward() {
         <div>
           <div className="flex items-center justify-between mb-3">
             <div>
-              <div className="font-display text-[18px] text-white uppercase">{selected.username}</div>
+              <div className="font-display text-[18px] text-cream uppercase">{selected.username}</div>
               <div className="font-body text-[10px] text-warm-grey">{selected.total_cuts} cuts · {selected.membership_tier}</div>
             </div>
-            <button onClick={() => { setSelected(null); setClaimedRewards([]) }} className="font-heading text-[10px] tracking-wider uppercase text-warm-grey hover:text-white transition-colors">
+            <button onClick={() => { setSelected(null); setClaimedRewards([]) }} className="font-heading text-[10px] tracking-wider uppercase text-warm-grey hover:text-cream transition-colors">
               CHANGE
             </button>
           </div>
@@ -125,7 +125,7 @@ export default function RedeemReward() {
                 <div key={cr.id} className="card p-4 border border-accent/20 flex items-center gap-3">
                   <span className="text-2xl">{cr.rewards?.icon}</span>
                   <div className="flex-1 min-w-0">
-                    <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white">{cr.rewards?.name}</div>
+                    <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream">{cr.rewards?.name}</div>
                     <div className="font-body text-[9px] text-warm-grey">Claimed {formatRelativeDate(cr.claimed_at)}</div>
                   </div>
                   <button

@@ -31,10 +31,10 @@ export default function Home() {
   return (
     <div className="scroll-container pb-28">
       {/* Header */}
-      <div className="px-4 pt-6 pb-2 bg-midnight sticky top-0 z-10 border-b border-white/5 flex items-start justify-between gap-3">
+      <div className="px-4 pt-6 pb-2 bg-midnight sticky top-0 z-10 border-b border-line/5 flex items-start justify-between gap-3">
         <div>
           <div className="font-body text-[11px] text-warm-grey">{greeting()}</div>
-          <div className="font-display text-[28px] text-white uppercase tracking-wider leading-tight">
+          <div className="font-display text-[28px] text-cream uppercase tracking-wider leading-tight">
             {profile?.username || 'King'}
           </div>
         </div>
@@ -135,7 +135,7 @@ function StatCard({ icon, value, label }) {
   return (
     <div className="card p-3 flex flex-col items-center gap-1">
       {icon}
-      <div className="font-display text-[22px] text-white leading-none">{value}</div>
+      <div className="font-display text-[22px] text-cream leading-none">{value}</div>
       <div className="font-heading text-[8px] tracking-widest uppercase text-warm-grey">{label}</div>
     </div>
   )

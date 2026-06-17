@@ -69,6 +69,7 @@ export function HallOfFameModal({ hofCount, onClose }) {
 
         {/* Card */}
         <div
+          data-theme="dark"
           className="relative z-10 text-center px-8 py-10 mx-6 rounded-[20px]"
           style={{
             background: 'linear-gradient(145deg, #1a1a2e, #16213e)',

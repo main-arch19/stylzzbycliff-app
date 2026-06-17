@@ -20,7 +20,7 @@ export function LeaderboardRow({ entry, index }) {
         flex items-center gap-3 p-3 rounded-[12px] border transition-all duration-200
         ${isMe
           ? 'border-clipper-red/50 bg-clipper-red/5'
-          : 'border-white/5 bg-charcoal'
+          : 'border-line/5 bg-charcoal'
         }
       `}
     >
@@ -38,14 +38,14 @@ export function LeaderboardRow({ entry, index }) {
       {/* Avatar */}
       <div
         className={`w-9 h-9 rounded-full shrink-0 flex items-center justify-center text-sm font-bold uppercase
-          ${isMe ? 'bg-clipper-red/30 text-clipper-red' : 'bg-charcoal text-warm-grey border border-white/10'}`}
+          ${isMe ? 'bg-clipper-red/30 text-clipper-red' : 'bg-charcoal text-warm-grey border border-line/10'}`}
       >
         {entry.username?.[0] || '?'}
       </div>
 
       {/* Name & tier */}
       <div className="flex-1 min-w-0">
-        <div className={`font-heading text-[13px] font-semibold tracking-wider uppercase truncate ${isMe ? 'text-white' : 'text-text-primary'}`}>
+        <div className={`font-heading text-[13px] font-semibold tracking-wider uppercase truncate ${isMe ? 'text-cream' : 'text-text-primary'}`}>
           {entry.username}
           {isMe && <span className="ml-1.5 text-[9px] text-clipper-red normal-case font-body">you</span>}
         </div>
@@ -64,7 +64,7 @@ export function LeaderboardRow({ entry, index }) {
 
       {/* XP */}
       <div className="text-right shrink-0">
-        <div className={`font-mono text-[13px] font-medium ${rank <= 3 ? 'text-accent' : 'text-white'}`}>
+        <div className={`font-mono text-[13px] font-medium ${rank <= 3 ? 'text-accent' : 'text-cream'}`}>
           {formatXP(entry.total_xp)}
         </div>
         <div className="font-body text-[8px] text-warm-grey uppercase tracking-wide">XP</div>

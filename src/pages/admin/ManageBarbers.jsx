@@ -43,7 +43,7 @@ export default function ManageBarbers() {
   return (
     <div className="p-4 max-w-xl">
       <div className="flex items-center justify-between mb-5">
-        <h1 className="font-display text-[28px] text-white uppercase tracking-wider">BARBERS</h1>
+        <h1 className="font-display text-[28px] text-cream uppercase tracking-wider">BARBERS</h1>
         <button onClick={() => setShowAdd(!showAdd)} className="btn btn-primary gap-2" style={{ height: 40, fontSize: 11 }}>
           <Plus size={14} /> ADD
         </button>
@@ -51,7 +51,7 @@ export default function ManageBarbers() {
 
       {showAdd && (
         <div className="card p-4 mb-5 border border-clipper-red/30 space-y-3">
-          <div className="font-heading text-[12px] tracking-wider uppercase text-white">Add Barber</div>
+          <div className="font-heading text-[12px] tracking-wider uppercase text-cream">Add Barber</div>
           <input className="input" placeholder="Name *" value={name} onChange={(e) => setName(e.target.value)} />
           <input className="input" placeholder="Specialty (optional)" value={specialty} onChange={(e) => setSpecialty(e.target.value)} />
           <button onClick={handleAdd} disabled={adding} className="btn btn-primary w-full">
@@ -70,11 +70,11 @@ export default function ManageBarbers() {
                 {b.name[0]}
               </div>
               <div className="flex-1 min-w-0">
-                <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white">{b.name}</div>
+                <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream">{b.name}</div>
                 {b.specialty && <div className="font-body text-[10px] text-warm-grey">{b.specialty}</div>}
               </div>
               <div className="flex items-center gap-3 shrink-0">
-                <button onClick={() => handleToggle(b)} className="text-warm-grey hover:text-white transition-colors">
+                <button onClick={() => handleToggle(b)} className="text-warm-grey hover:text-cream transition-colors">
                   {b.is_active ? <ToggleRight size={22} className="text-success" /> : <ToggleLeft size={22} />}
                 </button>
                 <button onClick={() => handleDelete(b.id)} className="text-warm-grey hover:text-error transition-colors">

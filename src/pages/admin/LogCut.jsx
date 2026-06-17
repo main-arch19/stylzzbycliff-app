@@ -80,7 +80,7 @@ export default function LogCut() {
   return (
     <div className="p-4 max-w-xl mx-auto">
       <div className="mb-6">
-        <h1 className="font-display text-[28px] text-white uppercase tracking-wider">LOG CUT</h1>
+        <h1 className="font-display text-[28px] text-cream uppercase tracking-wider">LOG CUT</h1>
         <p className="font-body text-[10px] text-warm-grey mt-1">Under 5 seconds. Tap, confirm, done.</p>
       </div>
 
@@ -88,7 +88,7 @@ export default function LogCut() {
       {success && (
         <div className="card p-6 border border-success/30 text-center mb-6 animate-slide-up">
           <CheckCircle size={40} className="text-success mx-auto mb-3" />
-          <div className="font-display text-[22px] text-white uppercase mb-1">CUT LOGGED 🔥</div>
+          <div className="font-display text-[22px] text-cream uppercase mb-1">CUT LOGGED 🔥</div>
           <div className="font-heading text-[12px] tracking-wider text-warm-grey mb-2">
             {success.username} earned <span className="text-accent font-mono">+{success.xp} XP</span>
           </div>
@@ -128,7 +128,7 @@ export default function LogCut() {
                   {selected.username[0]}
                 </div>
                 <div className="flex-1">
-                  <div className="font-heading text-[14px] font-semibold tracking-wider uppercase text-white">
+                  <div className="font-heading text-[14px] font-semibold tracking-wider uppercase text-cream">
                     {selected.username}
                   </div>
                   <div className="font-mono text-[10px] text-warm-grey">{selected.total_cuts} cuts total</div>
@@ -152,13 +152,13 @@ export default function LogCut() {
                     <button
                       key={c.id}
                       onClick={() => setSelected(c)}
-                      className="w-full flex items-center gap-3 p-3 rounded-[8px] border border-white/5 bg-charcoal hover:border-clipper-red/40 hover:bg-clipper-red/5 transition-all text-left"
+                      className="w-full flex items-center gap-3 p-3 rounded-[8px] border border-line/5 bg-charcoal hover:border-clipper-red/40 hover:bg-clipper-red/5 transition-all text-left"
                     >
-                      <div className="w-9 h-9 rounded-full bg-charcoal border border-white/10 flex items-center justify-center text-sm font-bold uppercase text-warm-grey shrink-0">
+                      <div className="w-9 h-9 rounded-full bg-charcoal border border-line/10 flex items-center justify-center text-sm font-bold uppercase text-warm-grey shrink-0">
                         {c.username[0]}
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white truncate">
+                        <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream truncate">
                           {c.username}
                         </div>
                         <div className="font-mono text-[9px] text-warm-grey">{c.total_cuts} cuts</div>
@@ -192,7 +192,7 @@ export default function LogCut() {
                     className={`px-4 py-2 rounded-pill border font-heading text-[11px] tracking-wider uppercase transition-all ${
                       barberSelected?.id === b.id
                         ? 'border-clipper-red bg-clipper-red/15 text-clipper-red'
-                        : 'border-white/10 text-warm-grey hover:border-white/30'
+                        : 'border-line/10 text-warm-grey hover:border-line/30'
                     }`}
                   >
                     {b.name}
@@ -221,7 +221,7 @@ export default function LogCut() {
                   className={`px-3 py-1.5 rounded-pill border font-heading text-[10px] tracking-wider uppercase transition-all ${
                     style === s
                       ? 'border-clipper-red bg-clipper-red/15 text-clipper-red'
-                      : 'border-white/10 text-warm-grey hover:border-white/30'
+                      : 'border-line/10 text-warm-grey hover:border-line/30'
                   }`}
                 >
                   {s}

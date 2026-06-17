@@ -11,7 +11,7 @@ export function TabBar() {
   const location = useLocation()
 
   return (
-    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-midnight border-t border-white/5 safe-bottom">
+    <nav className="fixed bottom-0 left-0 right-0 z-40 bg-midnight border-t border-line/5 safe-bottom">
       <div className="flex">
         {TABS.map((tab) => {
           const isActive = tab.path === '/'

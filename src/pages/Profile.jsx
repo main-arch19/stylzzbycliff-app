@@ -1,13 +1,16 @@
 import { useState } from 'react'
-import { Settings, Scissors, Flame, Trophy, Calendar } from 'lucide-react'
+import { Settings, Scissors, Flame, Trophy, Calendar, Sun, Moon } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
+import { useTheme } from '@/context/ThemeContext'
 import { StyleDNA } from '@/components/StyleDNA'
+import ThemeToggle from '@/components/ThemeToggle'
 import { useToast } from '@/components/Toast'
 import { getTierInfo } from '@/utils/helpers'
 import { supabase } from '@/lib/supabase'
 
 export default function Profile() {
   const { profile, updateProfile, signOut } = useAuth()
+  const { isLight, toggleTheme } = useTheme()
   const toast = useToast()
   const [showSettings, setShowSettings] = useState(false)
   const [editUsername, setEditUsername] = useState(profile?.username || '')
@@ -45,11 +48,11 @@ export default function Profile() {
   return (
     <div className="scroll-container pb-28">
       {/* Header */}
-      <div className="px-4 pt-6 pb-4 bg-midnight sticky top-0 z-10 border-b border-white/5 flex items-center justify-between">
-        <h1 className="font-display text-[28px] text-white uppercase tracking-wider">PROFILE</h1>
+      <div className="px-4 pt-6 pb-4 bg-midnight sticky top-0 z-10 border-b border-line/5 flex items-center justify-between">
+        <h1 className="font-display text-[28px] text-cream uppercase tracking-wider">PROFILE</h1>
         <div className="flex items-center gap-2">
           <ThemeToggle />
-          <button onClick={() => setShowSettings(!showSettings)} className="text-warm-grey hover:text-white transition-colors">
+          <button onClick={() => setShowSettings(!showSettings)} className="text-warm-grey hover:text-cream transition-colors">
             <Settings size={20} />
           </button>
         </div>
@@ -63,7 +66,7 @@ export default function Profile() {
             <div
               className="w-20 h-20 rounded-full flex items-center justify-center text-3xl font-bold uppercase"
               style={{
-                background: 'linear-gradient(135deg, #C0392B22, #1E1E1E)',
+                background: 'linear-gradient(135deg, #C0392B22, rgb(var(--c-surface)))',
                 border: '2px solid #C0392B',
               }}
             >
@@ -72,7 +75,7 @@ export default function Profile() {
           </div>
 
           <div>
-            <div className="font-display text-[22px] text-white uppercase tracking-wide leading-tight">
+            <div className="font-display text-[22px] text-cream uppercase tracking-wide leading-tight">
               {profile.username}
             </div>
             {profile.full_name && (
@@ -97,7 +100,7 @@ export default function Profile() {
           ].map((stat) => (
             <div key={stat.label} className="card p-3 flex flex-col items-center gap-1 text-center">
               {stat.icon}
-              <div className="font-display text-[18px] text-white leading-none">{stat.value}</div>
+              <div className="font-display text-[18px] text-cream leading-none">{stat.value}</div>
               <div className="font-heading text-[7px] tracking-widest uppercase text-warm-grey">{stat.label}</div>
             </div>
           ))}
@@ -117,7 +120,7 @@ export default function Profile() {
               <span className="font-display text-[24px] text-clipper-red">C</span>
             </div>
             <div className="flex-1">
-              <div className="font-heading text-[15px] font-semibold tracking-wider uppercase text-white">CLIFF</div>
+              <div className="font-heading text-[15px] font-semibold tracking-wider uppercase text-cream">CLIFF</div>
               <div className="font-body text-[10px] text-warm-grey">Master Barber · Fades & Line-Ups</div>
               <div className="flex gap-0.5 mt-1">
                 {[1,2,3,4,5].map((s) => (

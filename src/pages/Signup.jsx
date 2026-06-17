@@ -71,7 +71,7 @@ export default function Signup() {
         <div className="w-20 h-20 rounded-full bg-charcoal border-2 border-clipper-red/30 flex items-center justify-center mb-3 overflow-hidden">
           <span className="font-display text-[36px] text-clipper-red">S</span>
         </div>
-        <h1 className="font-display text-[36px] text-white tracking-widest uppercase">GET FRESH</h1>
+        <h1 className="font-display text-[36px] text-cream tracking-widest uppercase">GET FRESH</h1>
         <p className="font-heading text-[10px] tracking-[4px] uppercase text-warm-grey mt-1">
           Create Your Account
         </p>
@@ -118,7 +118,7 @@ export default function Signup() {
             <button
               type="button"
               onClick={() => setShowPass(!showPass)}
-              className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-grey hover:text-white transition-colors"
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-grey hover:text-cream transition-colors"
             >
               {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
             </button>
@@ -129,7 +129,7 @@ export default function Signup() {
         <button
           type="button"
           onClick={() => setShowReferral(!showReferral)}
-          className="flex items-center gap-2 text-warm-grey hover:text-white transition-colors"
+          className="flex items-center gap-2 text-warm-grey hover:text-cream transition-colors"
         >
           {showReferral ? <ChevronUp size={14} /> : <ChevronDown size={14} />}
           <span className="font-heading text-[10px] tracking-wider uppercase">
@@ -167,7 +167,7 @@ export default function Signup() {
         <span className="font-body text-[11px] text-warm-grey">Already fresh? </span>
         <Link
           to="/login"
-          className="font-heading text-[11px] tracking-wider uppercase text-clipper-red hover:text-white transition-colors"
+          className="font-heading text-[11px] tracking-wider uppercase text-clipper-red hover:text-cream transition-colors"
         >
           Log In
         </Link>

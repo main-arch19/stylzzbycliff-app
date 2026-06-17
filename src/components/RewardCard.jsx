@@ -12,14 +12,14 @@ export function RewardCard({ reward, totalCuts, isClaimed, isRedeemed, onClaim, 
           ? 'border-accent/40 shadow-glow-gold'
           : isRedeemed
           ? 'border-success/20 opacity-60'
-          : 'border-white/5'
+          : 'border-line/5'
       }`}
     >
       {/* Header */}
       <div className="flex items-center gap-3 mb-3">
         <span className="text-2xl">{reward.icon}</span>
         <div className="flex-1 min-w-0">
-          <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white truncate">
+          <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream truncate">
             {reward.name}
           </div>
           <div className="font-mono text-[10px] text-accent">

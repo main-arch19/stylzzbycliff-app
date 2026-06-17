@@ -3,13 +3,13 @@ import { formatRelativeDate } from '@/utils/helpers'
 
 export function CutHistoryRow({ cut }) {
   return (
-    <div className="flex items-center gap-3 py-3 border-b border-white/5 last:border-0">
+    <div className="flex items-center gap-3 py-3 border-b border-line/5 last:border-0">
       <div className="w-9 h-9 rounded-full bg-clipper-red/10 flex items-center justify-center shrink-0">
         <Scissors size={14} className="text-clipper-red" />
       </div>
 
       <div className="flex-1 min-w-0">
-        <div className="font-heading text-[13px] font-medium tracking-wider uppercase text-white truncate">
+        <div className="font-heading text-[13px] font-medium tracking-wider uppercase text-cream truncate">
           {cut.style}
         </div>
         <div className="font-body text-[9px] text-warm-grey mt-0.5">
@@ -27,7 +27,7 @@ export function CutHistoryRow({ cut }) {
 
 export function CutHistoryRowSkeleton() {
   return (
-    <div className="flex items-center gap-3 py-3 border-b border-white/5 last:border-0">
+    <div className="flex items-center gap-3 py-3 border-b border-line/5 last:border-0">
       <div className="w-9 h-9 rounded-full bg-charcoal animate-skeleton shrink-0" />
       <div className="flex-1 space-y-1.5">
         <div className="h-3 w-28 bg-charcoal animate-skeleton rounded" />

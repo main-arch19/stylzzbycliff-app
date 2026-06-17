@@ -54,7 +54,7 @@ export default function ManageRewards() {
   return (
     <div className="p-4 max-w-2xl">
       <div className="flex items-center justify-between mb-5">
-        <h1 className="font-display text-[28px] text-white uppercase tracking-wider">REWARDS</h1>
+        <h1 className="font-display text-[28px] text-cream uppercase tracking-wider">REWARDS</h1>
         <button
           onClick={() => { setShowForm(true); setForm(EMPTY); setEditId(null) }}
           className="btn btn-primary gap-2"
@@ -67,7 +67,7 @@ export default function ManageRewards() {
       {showForm && (
         <div className="card p-4 mb-5 border border-clipper-red/30 space-y-3">
           <div className="flex items-center justify-between">
-            <div className="font-heading text-[12px] tracking-wider uppercase text-white">{editId ? 'Edit Reward' : 'New Reward'}</div>
+            <div className="font-heading text-[12px] tracking-wider uppercase text-cream">{editId ? 'Edit Reward' : 'New Reward'}</div>
             <button onClick={() => setShowForm(false)}><X size={16} className="text-warm-grey" /></button>
           </div>
           <div className="grid grid-cols-2 gap-3">
@@ -110,14 +110,14 @@ export default function ManageRewards() {
             <div key={r.id} className={`card p-4 flex items-center gap-3 ${!r.is_active ? 'opacity-50' : ''}`}>
               <span className="text-xl">{r.icon}</span>
               <div className="flex-1 min-w-0">
-                <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white truncate">{r.name}</div>
+                <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream truncate">{r.name}</div>
                 <div className="font-mono text-[9px] text-accent">{r.cuts_required} cuts · +{r.xp_bonus} XP bonus</div>
               </div>
               <div className="flex items-center gap-2 shrink-0">
-                <button onClick={() => handleToggleActive(r)} className={`font-heading text-[8px] tracking-wider uppercase px-2 py-1 rounded-pill border transition-colors ${r.is_active ? 'border-success/30 text-success' : 'border-white/10 text-warm-grey'}`}>
+                <button onClick={() => handleToggleActive(r)} className={`font-heading text-[8px] tracking-wider uppercase px-2 py-1 rounded-pill border transition-colors ${r.is_active ? 'border-success/30 text-success' : 'border-line/10 text-warm-grey'}`}>
                   {r.is_active ? 'ON' : 'OFF'}
                 </button>
-                <button onClick={() => handleEdit(r)} className="text-warm-grey hover:text-white transition-colors"><Edit2 size={13} /></button>
+                <button onClick={() => handleEdit(r)} className="text-warm-grey hover:text-cream transition-colors"><Edit2 size={13} /></button>
                 <button onClick={() => handleDelete(r.id)} className="text-warm-grey hover:text-error transition-colors"><Trash2 size={13} /></button>
               </div>
             </div>

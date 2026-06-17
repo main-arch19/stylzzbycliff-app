@@ -97,7 +97,7 @@ export default function Analytics() {
 
   return (
     <div className="p-4 max-w-2xl">
-      <h1 className="font-display text-[28px] text-white uppercase tracking-wider mb-5">ANALYTICS</h1>
+      <h1 className="font-display text-[28px] text-cream uppercase tracking-wider mb-5">ANALYTICS</h1>
 
       {/* Key metrics */}
       <div className="grid grid-cols-2 gap-3 mb-6">
@@ -110,7 +110,7 @@ export default function Analytics() {
           <div key={s.label} className="card p-4 flex items-center gap-3">
             <div className="w-9 h-9 rounded-[8px] bg-midnight flex items-center justify-center shrink-0">{s.icon}</div>
             <div>
-              <div className="font-display text-[24px] text-white leading-none">{s.value}</div>
+              <div className="font-display text-[24px] text-cream leading-none">{s.value}</div>
               <div className="font-heading text-[8px] tracking-widest uppercase text-warm-grey mt-0.5">{s.label}</div>
             </div>
           </div>
@@ -171,7 +171,7 @@ export default function Analytics() {
           ) : popularStyles.map((s) => (
             <div key={s.style}>
               <div className="flex justify-between mb-1">
-                <span className="font-heading text-[11px] font-medium tracking-wider uppercase text-white">{s.style}</span>
+                <span className="font-heading text-[11px] font-medium tracking-wider uppercase text-cream">{s.style}</span>
                 <span className="font-mono text-[10px] text-warm-grey">{s.count} ({s.pct}%)</span>
               </div>
               <div className="progress-track">
@@ -185,7 +185,7 @@ export default function Analytics() {
       {/* Top customers */}
       <div>
         <div className="section-header mb-3">TOP CUSTOMERS</div>
-        <div className="card divide-y divide-white/5">
+        <div className="card divide-y divide-line/5">
           {topCustomers.map((c, i) => (
             <div key={c.username} className="flex items-center gap-3 p-3">
               <span className="font-mono text-[11px] text-warm-grey w-5">{i + 1}</span>
@@ -193,7 +193,7 @@ export default function Analytics() {
                 {c.username[0]}
               </div>
               <div className="flex-1">
-                <div className="font-heading text-[12px] font-semibold tracking-wider uppercase text-white">{c.username}</div>
+                <div className="font-heading text-[12px] font-semibold tracking-wider uppercase text-cream">{c.username}</div>
               </div>
               <div className="text-right">
                 <div className="font-mono text-[11px] text-accent">{c.total_cuts} cuts</div>

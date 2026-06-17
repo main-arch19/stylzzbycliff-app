@@ -29,7 +29,7 @@ export function XPCard({ profile, loading }) {
           <div className="flex flex-col items-center">
             <AnimatedNumber
               value={profile.total_xp}
-              className="font-display text-[22px] text-white leading-none"
+              className="font-display text-[22px] text-cream leading-none"
             />
             <span className="font-heading text-[8px] text-warm-grey tracking-widest uppercase mt-0.5">XP</span>
           </div>

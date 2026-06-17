@@ -71,7 +71,7 @@ export default function App() {
       <div className="min-h-dvh bg-midnight flex items-center justify-center">
         <div className="flex flex-col items-center gap-4">
           <div className="w-16 h-16 border-2 border-clipper-red border-t-transparent rounded-full animate-spin" />
-          <div className="font-display text-[20px] text-white tracking-widest">STYLZZ</div>
+          <div className="font-display text-[20px] text-cream tracking-widest">STYLZZ</div>
         </div>
       </div>
     )

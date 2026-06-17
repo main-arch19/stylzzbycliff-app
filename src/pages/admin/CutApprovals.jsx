@@ -83,14 +83,14 @@ export default function CutApprovals() {
       )}
 
       <div className="flex items-center justify-between mb-5">
-        <h1 className="font-display text-[28px] text-white uppercase tracking-wider">APPROVALS</h1>
+        <h1 className="font-display text-[28px] text-cream uppercase tracking-wider">APPROVALS</h1>
         {!loading && (
           <span
             className="font-heading text-[10px] tracking-wider uppercase px-2.5 py-1 rounded-pill"
             style={{
-              background: submissions.length > 0 ? 'rgba(192,57,43,0.15)' : 'rgba(255,255,255,0.05)',
+              background: submissions.length > 0 ? 'rgba(192,57,43,0.15)' : 'rgba(var(--c-line) / 0.05)',
               color: submissions.length > 0 ? '#C0392B' : '#6B6560',
-              border: `1px solid ${submissions.length > 0 ? 'rgba(192,57,43,0.3)' : 'rgba(255,255,255,0.08)'}`,
+              border: `1px solid ${submissions.length > 0 ? 'rgba(192,57,43,0.3)' : 'rgba(var(--c-line) / 0.08)'}`,
             }}
           >
             {submissions.length} PENDING
@@ -105,7 +105,7 @@ export default function CutApprovals() {
       ) : submissions.length === 0 ? (
         <div className="card py-14 text-center">
           <div className="text-3xl mb-3">✅</div>
-          <div className="font-heading text-[13px] tracking-wider uppercase text-white">
+          <div className="font-heading text-[13px] tracking-wider uppercase text-cream">
             All caught up
           </div>
           <div className="font-body text-[11px] text-warm-grey mt-1">
@@ -125,10 +125,10 @@ export default function CutApprovals() {
             return (
               <div key={sub.id} className="card overflow-hidden">
                 {/* Customer info row */}
-                <div className="p-4 pb-3 border-b border-white/5">
+                <div className="p-4 pb-3 border-b border-line/5">
                   <div className="flex items-start justify-between">
                     <div>
-                      <div className="font-heading text-[14px] font-semibold tracking-wider uppercase text-white">
+                      <div className="font-heading text-[14px] font-semibold tracking-wider uppercase text-cream">
                         {customer?.full_name || customer?.username || 'Unknown'}
                       </div>
                       <div className="flex items-center gap-2 mt-0.5">
@@ -165,7 +165,7 @@ export default function CutApprovals() {
                   <div className="flex items-center gap-2 text-warm-grey">
                     <Clock size={11} />
                     <span className="font-body text-[11px]">
-                      Cut on <span className="text-white">{formatDate(sub.cut_date)}</span>
+                      Cut on <span className="text-cream">{formatDate(sub.cut_date)}</span>
                       {' · '}Submitted {formatRelativeDate(sub.created_at)}
                     </span>
                   </div>
@@ -202,7 +202,7 @@ export default function CutApprovals() {
 
                 {/* Action buttons or reject form */}
                 {isRejecting ? (
-                  <div className="px-4 pb-4 space-y-3 border-t border-white/5 pt-3">
+                  <div className="px-4 pb-4 space-y-3 border-t border-line/5 pt-3">
                     <textarea
                       className="input resize-none w-full"
                       rows={2}
@@ -223,15 +223,15 @@ export default function CutApprovals() {
                       </button>
                       <button
                         onClick={() => setRejectId(null)}
-                        className="px-4 py-2.5 rounded-[10px] font-heading text-[11px] tracking-wider uppercase text-warm-grey hover:text-white transition-colors"
-                        style={{ background: 'rgba(255,255,255,0.05)' }}
+                        className="px-4 py-2.5 rounded-[10px] font-heading text-[11px] tracking-wider uppercase text-warm-grey hover:text-cream transition-colors"
+                        style={{ background: 'rgba(var(--c-line) / 0.05)' }}
                       >
                         CANCEL
                       </button>
                     </div>
                   </div>
                 ) : (
-                  <div className="px-4 pb-4 flex gap-2 border-t border-white/5 pt-3">
+                  <div className="px-4 pb-4 flex gap-2 border-t border-line/5 pt-3">
                     <button
                       onClick={() => handleApprove(sub)}
                       disabled={isProcessing}

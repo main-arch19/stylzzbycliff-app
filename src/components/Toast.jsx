@@ -45,7 +45,7 @@ function ToastItem({ toast, onRemove }) {
     <div
       className={`
         pointer-events-auto flex items-center gap-3 p-4 rounded-[12px]
-        bg-[#1E1E1E] border ${borders[toast.type] || 'border-white/10'}
+        bg-charcoal border ${borders[toast.type] || 'border-line/10'}
         animate-slide-up shadow-elevated
       `}
     >
@@ -53,7 +53,7 @@ function ToastItem({ toast, onRemove }) {
       <span className="font-heading text-[11px] font-semibold tracking-wide text-text-primary uppercase flex-1">
         {toast.message}
       </span>
-      <button onClick={() => onRemove(toast.id)} className="text-text-secondary hover:text-white transition-colors">
+      <button onClick={() => onRemove(toast.id)} className="text-text-secondary hover:text-cream transition-colors">
         <X size={12} />
       </button>
     </div>

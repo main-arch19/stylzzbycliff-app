@@ -7,10 +7,10 @@ export function ChallengeCard({ challenge, progress = {} }) {
   const timeLeft = timeUntil(challenge.ends_at)
 
   return (
-    <div className={`card p-4 border ${isCompleted ? 'border-success/30' : 'border-white/5'}`}>
+    <div className={`card p-4 border ${isCompleted ? 'border-success/30' : 'border-line/5'}`}>
       <div className="flex items-start justify-between gap-3 mb-3">
         <div className="flex-1 min-w-0">
-          <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white truncate">
+          <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream truncate">
             {challenge.name}
           </div>
           <div className="font-body text-[10px] text-warm-grey mt-0.5 line-clamp-2">

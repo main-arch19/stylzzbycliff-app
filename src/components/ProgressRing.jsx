@@ -19,7 +19,7 @@ export function ProgressRing({ progress = 0, size = 120, strokeWidth = 8, childr
           cy={center}
           r={radius}
           fill="none"
-          stroke="rgba(255,255,255,0.06)"
+          style={{ stroke: 'rgba(var(--c-line) / 0.12)' }}
           strokeWidth={strokeWidth}
         />
         {/* Progress */}

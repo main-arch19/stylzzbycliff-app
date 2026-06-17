@@ -23,11 +23,11 @@ export function BadgeGrid({ badges, earnedBadges = [], totalCuts, currentStreak 
             className={`card p-3 border transition-all duration-200 ${
               earned
                 ? 'border-accent/40 shadow-glow-gold'
-                : 'border-white/5 opacity-60'
+                : 'border-line/5 opacity-60'
             }`}
           >
             <div className="text-2xl mb-2">{badge.icon}</div>
-            <div className="font-heading text-[11px] font-semibold tracking-wider uppercase text-white mb-1 leading-tight">
+            <div className="font-heading text-[11px] font-semibold tracking-wider uppercase text-cream mb-1 leading-tight">
               {badge.name}
             </div>
             <div className="font-body text-[9px] text-warm-grey mb-2 line-clamp-2">

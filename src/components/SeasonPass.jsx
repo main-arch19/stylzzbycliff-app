@@ -36,7 +36,7 @@ export function SeasonPass() {
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
         <div>
-          <div className="font-display text-[20px] text-white">{seasonPass.name}</div>
+          <div className="font-display text-[20px] text-cream">{seasonPass.name}</div>
           <div className="font-heading text-[9px] tracking-widest uppercase text-warm-grey mt-0.5">
             {timeLeft}
           </div>
@@ -77,7 +77,7 @@ export function SeasonPass() {
                 font-heading text-[9px] font-semibold
                 ${unlocked
                   ? 'bg-red-gradient text-white'
-                  : 'bg-charcoal text-warm-grey border border-white/10'
+                  : 'bg-charcoal text-warm-grey border border-line/10'
                 }
               `}
             >

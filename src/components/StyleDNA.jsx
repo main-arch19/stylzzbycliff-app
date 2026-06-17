@@ -24,7 +24,7 @@ function Chip({ label, active, accent, onClick }) {
       type="button"
       onClick={onClick}
       className={`px-3 py-1.5 rounded-pill border font-heading text-[10px] tracking-wider uppercase transition-all ${
-        active ? activeCls : 'border-white/10 text-warm-grey hover:border-white/30'
+        active ? activeCls : 'border-line/10 text-warm-grey hover:border-line/30'
       }`}
     >
       {label}
@@ -74,11 +74,11 @@ function StyleDNAPicker() {
       <div className="p-4 rounded-[10px] border border-clipper-red/30 bg-gradient-to-br from-clipper-red/10 to-transparent mb-5">
         {hasSelection ? (
           <div className="flex items-center justify-center gap-3 flex-wrap text-center">
-            <span className="font-display text-[22px] text-white uppercase tracking-wide leading-none">
+            <span className="font-display text-[22px] text-cream uppercase tracking-wide leading-none">
               {haircut || '—'}
             </span>
             <span className="font-display text-[18px] text-clipper-red leading-none">×</span>
-            <span className="font-display text-[22px] text-white uppercase tracking-wide leading-none">
+            <span className="font-display text-[22px] text-cream uppercase tracking-wide leading-none">
               {beard || '—'}
             </span>
           </div>
@@ -178,7 +178,7 @@ function StyleBreakdown() {
 
   return (
     <div className="card p-5">
-      <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white mb-1">
+      <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream mb-1">
         Style Breakdown
       </div>
       <div className="font-body text-[10px] text-warm-grey mb-4">
@@ -191,7 +191,7 @@ function StyleBreakdown() {
         {styles.map((s) => (
           <div key={s.style}>
             <div className="flex justify-between mb-1">
-              <span className="font-heading text-[11px] font-medium tracking-wide uppercase text-white">{s.style}</span>
+              <span className="font-heading text-[11px] font-medium tracking-wide uppercase text-cream">{s.style}</span>
               <span className="font-mono text-[10px] text-warm-grey">{s.percentage}%</span>
             </div>
             <div className="progress-track">

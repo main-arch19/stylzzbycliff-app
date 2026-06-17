@@ -57,7 +57,7 @@ export function CheckInButton() {
         <MapPin size={18} className="text-clipper-red" />
       </div>
       <div className="flex-1">
-        <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white">
+        <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream">
           {loading ? 'CHECKING IN...' : 'CHECK IN AT SHOP'}
         </div>
         <div className="font-mono text-[10px] text-accent mt-0.5">+50 XP</div>

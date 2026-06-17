@@ -58,7 +58,7 @@ export function SpinWheel() {
     <div className="card p-5">
       <div className="flex items-center justify-between mb-4">
         <div>
-          <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-white">
+          <div className="font-heading text-[13px] font-semibold tracking-wider uppercase text-cream">
             LUCKY SPIN
           </div>
           <div className="font-mono text-[10px] text-accent mt-0.5">
@@ -93,6 +93,7 @@ export function SpinWheel() {
 
             <div
               ref={wheelRef}
+              data-theme="dark"
               className="relative w-52 h-52 rounded-full overflow-hidden border-4 border-[#2a2a2a]"
               style={{
                 transform: `rotate(${rotation}deg)`,
