@@ -1,5 +1,6 @@
 import { Navigate, useLocation } from 'react-router-dom'
 import { useAuth } from '@/hooks/useAuth'
+import { MOCK_MODE } from '@/lib/mockData'
 
 export function ProtectedRoute({ children, requireRole }) {
   const { user, profile, loading } = useAuth()
@@ -16,14 +17,17 @@ export function ProtectedRoute({ children, requireRole }) {
     )
   }
 
-  // PAUSED — uncomment to restore login requirement
-  // if (!user) {
-  //   return <Navigate to="/login" state={{ from: location }} replace />
-  // }
+  // In mock/preview mode every route is open so the UI can be browsed
+  // without a real session (including admin screens).
+  if (MOCK_MODE) return children
 
-  // if (requireRole && profile?.role !== requireRole && profile?.role !== 'admin') {
-  //   return <Navigate to="/" replace />
-  // }
+  if (!user) {
+    return <Navigate to="/login" state={{ from: location }} replace />
+  }
+
+  if (requireRole && profile?.role !== requireRole && profile?.role !== 'admin') {
+    return <Navigate to="/" replace />
+  }
 
   return children
 }

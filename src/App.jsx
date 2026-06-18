@@ -1,8 +1,8 @@
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { Routes, Route, Navigate } from 'react-router-dom'
+import { useEffect, lazy, Suspense } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 
-// Pages
+// Customer-facing pages (the core app) — loaded eagerly for snappy nav.
 import Login from '@/pages/Login'
 import Signup from '@/pages/Signup'
 import Home from '@/pages/Home'
@@ -10,19 +10,33 @@ import Rewards from '@/pages/Rewards'
 import Profile from '@/pages/Profile'
 import Social from '@/pages/Social'
 import SubmitCut from '@/pages/SubmitCut'
-import AdminLayout from '@/pages/admin/AdminLayout'
-import LogCut from '@/pages/admin/LogCut'
-import Customers from '@/pages/admin/Customers'
-import ManageRewards from '@/pages/admin/ManageRewards'
-import ManageChallenges from '@/pages/admin/ManageChallenges'
-import ManageBarbers from '@/pages/admin/ManageBarbers'
-import Analytics from '@/pages/admin/Analytics'
-import RedeemReward from '@/pages/admin/RedeemReward'
-import CutApprovals from '@/pages/admin/CutApprovals'
+import Appointments from '@/pages/Appointments'
+
+// Admin panel — code-split into its own chunk so customers never download it.
+const AdminLayout = lazy(() => import('@/pages/admin/AdminLayout'))
+const Dashboard = lazy(() => import('@/pages/admin/Dashboard'))
+const LogCut = lazy(() => import('@/pages/admin/LogCut'))
+const Schedule = lazy(() => import('@/pages/admin/Schedule'))
+const Customers = lazy(() => import('@/pages/admin/Customers'))
+const ManageRewards = lazy(() => import('@/pages/admin/ManageRewards'))
+const ManageChallenges = lazy(() => import('@/pages/admin/ManageChallenges'))
+const ManageBarbers = lazy(() => import('@/pages/admin/ManageBarbers'))
+const Analytics = lazy(() => import('@/pages/admin/Analytics'))
+const RedeemReward = lazy(() => import('@/pages/admin/RedeemReward'))
+const CutApprovals = lazy(() => import('@/pages/admin/CutApprovals'))
 
 // Components
 import { TabBar } from '@/components/TabBar'
 import { ProtectedRoute } from '@/components/ProtectedRoute'
+
+// Lightweight fallback while a lazy chunk loads.
+function RouteFallback() {
+  return (
+    <div className="min-h-dvh bg-midnight flex items-center justify-center">
+      <div className="w-10 h-10 border-2 border-clipper-red border-t-transparent rounded-full animate-spin" />
+    </div>
+  )
+}
 
 // PWA install prompt on second visit
 function usePWAInstallPrompt() {
@@ -89,6 +103,11 @@ export default function App() {
           <CustomerLayout><Home /></CustomerLayout>
         </ProtectedRoute>
       } />
+      <Route path="/appointments" element={
+        <ProtectedRoute>
+          <CustomerLayout><Appointments /></CustomerLayout>
+        </ProtectedRoute>
+      } />
       <Route path="/rewards" element={
         <ProtectedRoute>
           <CustomerLayout><Rewards /></CustomerLayout>
@@ -113,10 +132,14 @@ export default function App() {
       {/* Admin */}
       <Route path="/admin" element={
         <ProtectedRoute requireRole="barber">
-          <AdminLayout />
+          <Suspense fallback={<RouteFallback />}>
+            <AdminLayout />
+          </Suspense>
         </ProtectedRoute>
       }>
-        <Route index element={<LogCut />} />
+        <Route index element={<Dashboard />} />
+        <Route path="log" element={<LogCut />} />
+        <Route path="schedule" element={<Schedule />} />
         <Route path="approvals" element={<CutApprovals />} />
         <Route path="customers" element={<Customers />} />
         <Route path="rewards" element={<ManageRewards />} />

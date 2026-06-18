@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { Settings, Scissors, Flame, Trophy, Calendar, Sun, Moon } from 'lucide-react'
+import { Settings, Scissors, Flame, Trophy, Calendar, Sun, Moon, Bell } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { useTheme } from '@/context/ThemeContext'
+import { useWebPush } from '@/hooks/useWebPush'
 import { StyleDNA } from '@/components/StyleDNA'
 import ThemeToggle from '@/components/ThemeToggle'
 import { useToast } from '@/components/Toast'
@@ -11,7 +12,14 @@ import { supabase } from '@/lib/supabase'
 export default function Profile() {
   const { profile, updateProfile, signOut } = useAuth()
   const { isLight, toggleTheme } = useTheme()
+  const { supported: pushSupported, subscribed: pushOn, loading: pushLoading, subscribe, unsubscribe } = useWebPush()
   const toast = useToast()
+
+  const handleTogglePush = async () => {
+    const { error } = pushOn ? await unsubscribe() : await subscribe()
+    if (error) toast(error.message || 'Could not update notifications.', 'error')
+    else toast(pushOn ? 'Notifications off.' : "Notifications on. We'll keep you fresh.", 'success')
+  }
   const [showSettings, setShowSettings] = useState(false)
   const [editUsername, setEditUsername] = useState(profile?.username || '')
   const [saving, setSaving] = useState(false)
@@ -169,6 +177,7 @@ export default function Profile() {
                   onClick={toggleTheme}
                   role="switch"
                   aria-checked={isLight}
+                  aria-label="Toggle light mode"
                   className="relative w-12 h-7 rounded-pill border border-line/15 bg-line/5 transition-colors"
                 >
                   <span
@@ -178,6 +187,34 @@ export default function Profile() {
                   </span>
                 </button>
               </div>
+
+              {pushSupported && (
+                <>
+                  <div className="divider" />
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="section-header mb-1">Notifications</div>
+                      <div className="font-body text-[9px] text-warm-grey">
+                        Reminders, streak alerts &amp; drops
+                      </div>
+                    </div>
+                    <button
+                      onClick={handleTogglePush}
+                      disabled={pushLoading}
+                      role="switch"
+                      aria-checked={pushOn}
+                      aria-label="Toggle notifications"
+                      className="relative w-12 h-7 rounded-pill border border-line/15 bg-line/5 transition-colors disabled:opacity-50"
+                    >
+                      <span
+                        className={`absolute top-0.5 left-0.5 w-6 h-6 rounded-full flex items-center justify-center transition-transform ${pushOn ? 'translate-x-5 bg-clipper-red text-white' : 'bg-line/20 text-warm-grey'}`}
+                      >
+                        <Bell size={13} />
+                      </span>
+                    </button>
+                  </div>
+                </>
+              )}
 
               <div className="divider" />
 

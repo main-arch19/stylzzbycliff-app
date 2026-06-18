@@ -1,4 +1,4 @@
-const CACHE_NAME = 'stylzzbycliff-v1'
+const CACHE_NAME = 'stylzzbycliff-v2'
 const STATIC_ASSETS = [
   '/',
   '/index.html',
@@ -23,6 +23,40 @@ self.addEventListener('activate', (event) => {
     )
   )
   self.clients.claim()
+})
+
+// Push: show the notification sent by the send-push Edge Function.
+// Payload shape: { title, body, url, tag }
+self.addEventListener('push', (event) => {
+  let data = {}
+  try { data = event.data ? event.data.json() : {} } catch { data = {} }
+
+  const title = data.title || 'StylzzByCliff'
+  const options = {
+    body: data.body || '',
+    icon: '/icons/icon-192.png',
+    badge: '/icons/icon-192.png',
+    tag: data.tag || 'stylzz',
+    data: { url: data.url || '/' },
+  }
+  event.waitUntil(self.registration.showNotification(title, options))
+})
+
+// Notification click: focus an existing tab or open the target route.
+self.addEventListener('notificationclick', (event) => {
+  event.notification.close()
+  const target = (event.notification.data && event.notification.data.url) || '/'
+  event.waitUntil(
+    self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then((clients) => {
+      for (const client of clients) {
+        if ('focus' in client) {
+          client.navigate?.(target)
+          return client.focus()
+        }
+      }
+      return self.clients.openWindow(target)
+    })
+  )
 })
 
 // Fetch: cache-first for static, network-first for Supabase API

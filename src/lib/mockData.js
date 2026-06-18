@@ -1,7 +1,8 @@
 // ─── MOCK MODE ────────────────────────────────────────────────────
-// Set to true to bypass Supabase and display example player data.
-// Set back to false when ready to use real auth + database.
-export const MOCK_MODE = true
+// Bypasses Supabase and displays example player data. Driven by env so it
+// can never ship to production by accident: defaults OFF, opt in locally
+// with VITE_MOCK_MODE=true (see .env.local / .env.example).
+export const MOCK_MODE = import.meta.env.VITE_MOCK_MODE === 'true'
 
 // ─── Helpers ──────────────────────────────────────────────────────
 const daysAgo = (n) => {
@@ -12,6 +13,11 @@ const daysAgo = (n) => {
 const daysFromNow = (n) => {
   const d = new Date()
   d.setDate(d.getDate() + n)
+  return d.toISOString()
+}
+const hoursFromNow = (n) => {
+  const d = new Date()
+  d.setHours(d.getHours() + n)
   return d.toISOString()
 }
 
@@ -147,3 +153,60 @@ export const MOCK_LEADERBOARD = [
   { id: 'mock-000-000', rank: 4, username: 'CliffKing', total_xp: 3200, total_cuts: 17 },
   { id: 'u-5', rank: 5, username: 'FreshTaper', total_xp: 2800, total_cuts: 14 },
 ]
+
+// ─── Services (bookable catalog) ──────────────────────────────────
+export const MOCK_SERVICES = [
+  { id: 'svc-1', name: 'Skin Fade',    duration_min: 30, price_cents: 3500, deposit_cents: 1000, is_active: true, sort_order: 1 },
+  { id: 'svc-2', name: 'Fade + Beard', duration_min: 45, price_cents: 4500, deposit_cents: 1500, is_active: true, sort_order: 2 },
+  { id: 'svc-3', name: 'Line Up',      duration_min: 15, price_cents: 1500, deposit_cents: 0,    is_active: true, sort_order: 3 },
+]
+
+// ─── Appointments (fed in from the external calendar) ─────────────
+// Matched rows belong to the mock user; the last row is unmatched
+// (no account with that email) to exercise the admin queue.
+export const MOCK_APPOINTMENTS = [
+  {
+    id: 'appt-1', customer_id: 'mock-000-000', customer_email: 'demo@stylzzbycliff.com',
+    customer_name: 'Cliff King', barber_id: 'barber-1', barbers: { name: 'Cliff' },
+    service_name: 'Skin Fade', starts_at: hoursFromNow(26), ends_at: hoursFromNow(26.5),
+    status: 'confirmed', source: 'website', external_ref: 'cal_1', cut_id: null,
+    created_at: hoursFromNow(-3),
+  },
+  {
+    id: 'appt-2', customer_id: 'mock-000-000', customer_email: 'demo@stylzzbycliff.com',
+    customer_name: 'Cliff King', barber_id: 'barber-1', barbers: { name: 'Cliff' },
+    service_name: 'Fade + Beard', starts_at: daysFromNow(6), ends_at: daysFromNow(6),
+    status: 'confirmed', source: 'website', external_ref: 'cal_2', cut_id: null,
+    created_at: daysAgo(1),
+  },
+  {
+    id: 'appt-3', customer_id: 'mock-000-000', customer_email: 'demo@stylzzbycliff.com',
+    customer_name: 'Cliff King', barber_id: 'barber-1', barbers: { name: 'Cliff' },
+    service_name: 'Skin Fade', starts_at: daysAgo(5), ends_at: daysAgo(5),
+    status: 'completed', source: 'website', external_ref: 'cal_0', cut_id: 'cut-1',
+    created_at: daysAgo(6),
+  },
+  {
+    id: 'appt-9', customer_id: null, customer_email: 'newguy@example.com',
+    customer_name: 'New Guy', barber_id: 'barber-1', barbers: { name: 'Cliff' },
+    service_name: 'Line Up', starts_at: hoursFromNow(30), ends_at: hoursFromNow(30.5),
+    status: 'confirmed', source: 'website', external_ref: 'cal_9', cut_id: null,
+    created_at: hoursFromNow(-1),
+  },
+]
+
+// ─── Barber dashboard aggregates ──────────────────────────────────
+export const MOCK_DASHBOARD = {
+  appointments_today: 3,
+  next_appointment: { starts_at: hoursFromNow(2), customer_name: 'Cliff King', service_name: 'Skin Fade' },
+  cuts_today: 2,
+  cuts_week: 11,
+  tips_today_cents: 1500,
+  tips_week_cents: 8200,
+  pending_approvals: 2,
+  pending_redemptions: 1,
+  decay_risk: 3,
+  unmatched_bookings: 1,
+  website_bookings_upcoming: 2,
+  new_customers_week: 4,
+}

@@ -80,8 +80,9 @@ export default function Signup() {
       {/* Form */}
       <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
         <div>
-          <label className="section-header block mb-2">Username</label>
+          <label htmlFor="signup-username" className="section-header block mb-2">Username</label>
           <input
+            id="signup-username"
             type="text"
             className="input"
             placeholder="freshking, cliffsfav..."
@@ -93,8 +94,9 @@ export default function Signup() {
         </div>
 
         <div>
-          <label className="section-header block mb-2">Email</label>
+          <label htmlFor="signup-email" className="section-header block mb-2">Email</label>
           <input
+            id="signup-email"
             type="email"
             className="input"
             placeholder="your@email.com"
@@ -105,9 +107,10 @@ export default function Signup() {
         </div>
 
         <div>
-          <label className="section-header block mb-2">Password</label>
+          <label htmlFor="signup-password" className="section-header block mb-2">Password</label>
           <div className="relative">
             <input
+              id="signup-password"
               type={showPass ? 'text' : 'password'}
               className="input pr-12"
               placeholder="••••••••"
@@ -118,6 +121,8 @@ export default function Signup() {
             <button
               type="button"
               onClick={() => setShowPass(!showPass)}
+              aria-label={showPass ? 'Hide password' : 'Show password'}
+              aria-pressed={showPass}
               className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-grey hover:text-cream transition-colors"
             >
               {showPass ? <EyeOff size={16} /> : <Eye size={16} />}
@@ -141,6 +146,7 @@ export default function Signup() {
           <div>
             <input
               type="text"
+              aria-label="Referral code"
               className="input font-mono uppercase tracking-widest"
               placeholder="XXXXXXXX"
               value={referralCode}

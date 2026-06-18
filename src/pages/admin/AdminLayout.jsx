@@ -1,12 +1,14 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom'
-import { Scissors, Users, Gift, Target, UserCog, BarChart2, Tag, LogOut, Menu, X, CheckSquare } from 'lucide-react'
-import { useState, useEffect } from 'react'
+import { Scissors, Users, Gift, Target, UserCog, BarChart2, Tag, LogOut, Menu, X, CheckSquare, CalendarClock, LayoutDashboard } from 'lucide-react'
+import { useState, useEffect, Suspense } from 'react'
 import { useAuth } from '@/hooks/useAuth'
 import { supabase } from '@/lib/supabase'
 import ThemeToggle from '@/components/ThemeToggle'
 
 const NAV = [
-  { path: '/admin',             label: 'LOG CUT',   icon: Scissors,    end: true },
+  { path: '/admin',             label: 'DASHBOARD', icon: LayoutDashboard, end: true },
+  { path: '/admin/log',         label: 'LOG CUT',   icon: Scissors              },
+  { path: '/admin/schedule',    label: 'SCHEDULE',  icon: CalendarClock         },
   { path: '/admin/approvals',   label: 'APPROVALS', icon: CheckSquare           },
   { path: '/admin/customers',   label: 'CUSTOMERS', icon: Users                 },
   { path: '/admin/redeem',      label: 'REDEEM',    icon: Tag                   },
@@ -58,6 +60,8 @@ export default function AdminLayout() {
           <ThemeToggle />
           <button
             onClick={() => setMenuOpen(!menuOpen)}
+            aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+            aria-expanded={menuOpen}
             className="text-warm-grey hover:text-cream transition-colors md:hidden"
           >
             {menuOpen ? <X size={20} /> : <Menu size={20} />}
@@ -110,7 +114,13 @@ export default function AdminLayout() {
 
         {/* Main content */}
         <main className="flex-1 overflow-auto">
-          <Outlet />
+          <Suspense fallback={
+            <div className="flex items-center justify-center py-20">
+              <div className="w-8 h-8 border-2 border-clipper-red border-t-transparent rounded-full animate-spin" />
+            </div>
+          }>
+            <Outlet />
+          </Suspense>
         </main>
       </div>
     </div>

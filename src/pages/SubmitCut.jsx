@@ -80,6 +80,7 @@ export default function SubmitCut() {
         <div className="flex items-center gap-3 min-w-0">
           <button
             onClick={() => navigate(-1)}
+            aria-label="Go back"
             className="text-warm-grey hover:text-cream transition-colors"
           >
             <ArrowLeft size={20} />
@@ -102,10 +103,11 @@ export default function SubmitCut() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Date */}
             <div>
-              <label className="font-heading text-[10px] tracking-widest uppercase text-warm-grey block mb-1.5">
+              <label htmlFor="cut-date" className="font-heading text-[10px] tracking-widest uppercase text-warm-grey block mb-1.5">
                 CUT DATE
               </label>
               <input
+                id="cut-date"
                 type="date"
                 className="input"
                 value={cutDate}
@@ -131,6 +133,7 @@ export default function SubmitCut() {
                   <button
                     type="button"
                     onClick={removePhoto}
+                    aria-label="Remove photo"
                     className="absolute top-2 right-2 w-7 h-7 rounded-full bg-black/60 flex items-center justify-center text-white"
                   >
                     <X size={12} />
@@ -160,10 +163,11 @@ export default function SubmitCut() {
 
             {/* Notes */}
             <div>
-              <label className="font-heading text-[10px] tracking-widest uppercase text-warm-grey block mb-1.5">
+              <label htmlFor="cut-notes" className="font-heading text-[10px] tracking-widest uppercase text-warm-grey block mb-1.5">
                 NOTES (OPTIONAL)
               </label>
               <textarea
+                id="cut-notes"
                 className="input resize-none"
                 rows={2}
                 placeholder="e.g. mid fade, 3pm appointment..."

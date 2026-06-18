@@ -45,8 +45,9 @@ export default function Login() {
       {/* Form */}
       <form onSubmit={handleSubmit} className="w-full max-w-sm space-y-4">
         <div>
-          <label className="section-header block mb-2">Email</label>
+          <label htmlFor="login-email" className="section-header block mb-2">Email</label>
           <input
+            id="login-email"
             type="email"
             className="input"
             placeholder="your@email.com"
@@ -57,9 +58,10 @@ export default function Login() {
         </div>
 
         <div>
-          <label className="section-header block mb-2">Password</label>
+          <label htmlFor="login-password" className="section-header block mb-2">Password</label>
           <div className="relative">
             <input
+              id="login-password"
               type={showPass ? 'text' : 'password'}
               className="input pr-12"
               placeholder="••••••••"
@@ -70,6 +72,8 @@ export default function Login() {
             <button
               type="button"
               onClick={() => setShowPass(!showPass)}
+              aria-label={showPass ? 'Hide password' : 'Show password'}
+              aria-pressed={showPass}
               className="absolute right-4 top-1/2 -translate-y-1/2 text-warm-grey hover:text-cream transition-colors"
             >
               {showPass ? <EyeOff size={16} /> : <Eye size={16} />}

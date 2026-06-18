@@ -1,10 +1,11 @@
 import { NavLink, useLocation } from 'react-router-dom'
 
 const TABS = [
-  { path: '/',        label: 'HOME',    icon: '⚡' },
-  { path: '/rewards', label: 'REWARDS', icon: '🏆' },
-  { path: '/profile', label: 'PROFILE', icon: '👤' },
-  { path: '/social',  label: 'SOCIAL',  icon: '👥' },
+  { path: '/',             label: 'HOME',    icon: '⚡' },
+  { path: '/appointments', label: 'APPTS',   icon: '📅' },
+  { path: '/rewards',      label: 'REWARDS', icon: '🏆' },
+  { path: '/profile',      label: 'PROFILE', icon: '👤' },
+  { path: '/social',       label: 'SOCIAL',  icon: '👥' },
 ]
 
 export function TabBar() {
