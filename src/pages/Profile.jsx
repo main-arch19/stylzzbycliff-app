@@ -9,7 +9,6 @@ import ThemeToggle from '@/components/ThemeToggle'
 import { useToast } from '@/components/Toast'
 import { getTierInfo } from '@/utils/helpers'
 import { supabase } from '@/lib/supabase'
-import { MOCK_MODE } from '@/lib/mockData'
 
 export default function Profile() {
   const { profile, updateProfile, signOut } = useAuth()
@@ -61,15 +60,15 @@ export default function Profile() {
       <div className="px-4 pt-6 pb-4 bg-midnight sticky top-0 z-10 border-b border-line/5 flex items-center justify-between">
         <h1 className="font-display text-[28px] text-cream uppercase tracking-wider">PROFILE</h1>
         <div className="flex items-center gap-2">
-          {(profile.role === 'barber' || profile.role === 'admin' || MOCK_MODE) && (
-            <Link
-              to="/admin"
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-pill border border-line/15 font-heading text-[10px] tracking-wider uppercase text-warm-grey hover:text-cream hover:border-clipper-red/40 transition-colors"
-            >
-              <LayoutDashboard size={13} />
-              Admin
-            </Link>
-          )}
+          {/* TODO: gate to barber/admin once customer vs. admin logins are
+              split. For now always show so the admin area stays reachable. */}
+          <Link
+            to="/admin"
+            className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-pill border border-line/15 font-heading text-[10px] tracking-wider uppercase text-warm-grey hover:text-cream hover:border-clipper-red/40 transition-colors"
+          >
+            <LayoutDashboard size={13} />
+            Admin
+          </Link>
           <ThemeToggle />
           <button onClick={() => setShowSettings(!showSettings)} aria-label="Settings" className="text-warm-grey hover:text-cream transition-colors">
             <Settings size={20} />

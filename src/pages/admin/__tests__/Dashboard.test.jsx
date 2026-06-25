@@ -45,4 +45,11 @@ describe('Barber Dashboard', () => {
     expect(screen.getByText('Cut approvals')).toBeInTheDocument()
     expect(screen.getByText('LOG WALK-IN')).toBeInTheDocument()
   })
+
+  it('renders the broadcast composer directly under the greeting', () => {
+    render(<MemoryRouter><Dashboard /></MemoryRouter>)
+    expect(screen.getByText('Message all customers')).toBeInTheDocument()
+    expect(screen.getByPlaceholderText('Subject')).toBeInTheDocument()
+    expect(screen.getByText('SEND BROADCAST')).toBeInTheDocument()
+  })
 })
