@@ -148,3 +148,56 @@ Point a Stripe webhook at
 
 Use card `4242 4242 4242 4242`, any future expiry/CVC. Watch the `payments`
 table flip from `pending` to `paid`.
+
+---
+
+## Broadcast email (Resend)
+
+`send-broadcast` emails every customer whose email has been collected
+(`profiles` where `role='customer'` and `email is not null`). It's invoked from
+the barber dashboard's "message all customers" box and is **gated to barber/admin
+callers** server-side. Each customer is emailed individually (no shared To/BCC).
+Every blast is logged to the `broadcasts` table (migration `011_broadcasts.sql`).
+
+### 1. Set up Resend (once)
+
+1. Create a free [Resend](https://resend.com) account.
+2. **Add and verify your sending domain** (`stylzzbycliff.com`) — add the
+   SPF/DKIM DNS records Resend gives you. Without a verified domain, mail is
+   rejected or lands in spam.
+3. Create an API key.
+
+> Free tier: **100 emails/day, 3,000/month**. A larger list needs a paid plan.
+
+### 2. Set secrets
+
+```bash
+supabase secrets set \
+  RESEND_API_KEY=re_xxx \
+  BROADCAST_FROM='StylzzByCliff <hello@stylzzbycliff.com>'
+```
+
+`BROADCAST_FROM` must use the verified domain. `SUPABASE_URL`,
+`SUPABASE_ANON_KEY`, and `SUPABASE_SERVICE_ROLE_KEY` are injected automatically.
+
+### 3. Apply the migration + deploy
+
+```bash
+supabase db push                      # creates the broadcasts audit table
+supabase functions deploy send-broadcast
+```
+
+### 4. Test
+
+```bash
+# Use a BARBER/ADMIN user's JWT (a customer JWT must get 403).
+curl -X POST "$SUPABASE_URL/functions/v1/send-broadcast" \
+  -H "Authorization: Bearer <barber-or-admin-jwt>" \
+  -H "Content-Type: application/json" \
+  -d '{"subject":"Test 🔥","body":"Hey from the shop!"}'
+# -> { "sent": <number of customers emailed> }
+```
+
+> Compliance: bulk mail should carry an unsubscribe path + the shop's name. The
+> function adds a "Reply STOP to opt out" footer; a real `email_opt_out` flag on
+> `profiles` (filtered in the recipient query) is the proper fast-follow.

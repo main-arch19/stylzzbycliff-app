@@ -2,13 +2,14 @@ import { useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { format } from 'date-fns'
 import {
-  CalendarClock, Scissors, DollarSign, Bell, RefreshCw, Globe, Check, UserX,
+  CalendarClock, Scissors, DollarSign, Bell, RefreshCw, Globe, Check, X,
   CheckSquare, Link2, Tag, AlertTriangle, Users, BarChart2, ChevronRight,
 } from 'lucide-react'
 import { useAuth } from '@/hooks/useAuth'
 import { useBarberDashboard } from '@/hooks/useBarberDashboard'
 import { useAdminAppointments } from '@/hooks/useAppointments'
 import { useToast } from '@/components/Toast'
+import BroadcastBox from '@/components/BroadcastBox'
 
 const STATUS = {
   pending:   'badge-pending',
@@ -76,6 +77,9 @@ export default function Dashboard() {
           <RefreshCw size={16} />
         </button>
       </div>
+
+      {/* Broadcast — message all customers */}
+      <BroadcastBox />
 
       {/* Today at a glance */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
@@ -196,8 +200,8 @@ export default function Dashboard() {
                       <button onClick={() => handleComplete(a.id)} aria-label="Complete" className="p-2 rounded-[8px] bg-success/15 text-success hover:bg-success/25">
                         <Check size={14} />
                       </button>
-                      <button onClick={() => handleNoShow(a.id)} aria-label="No-show" className="p-2 rounded-[8px] bg-line/5 text-warm-grey hover:text-error">
-                        <UserX size={14} />
+                      <button onClick={() => handleNoShow(a.id)} aria-label="No-show" className="p-2 rounded-[8px] bg-error/15 text-error hover:bg-error/25">
+                        <X size={14} />
                       </button>
                     </div>
                   ) : (
