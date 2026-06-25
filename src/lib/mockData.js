@@ -1,8 +1,22 @@
 // ─── MOCK MODE ────────────────────────────────────────────────────
-// Bypasses Supabase and displays example player data. Driven by env so it
-// can never ship to production by accident: defaults OFF, opt in locally
-// with VITE_MOCK_MODE=true (see .env.local / .env.example).
-export const MOCK_MODE = import.meta.env.VITE_MOCK_MODE === 'true'
+// Bypasses Supabase and displays example player data. ON when
+// VITE_MOCK_MODE=true, OR automatically when no Supabase credentials are
+// configured — so a fresh deploy (e.g. Vercel without env vars) shows the
+// preview instead of a blank screen. Add VITE_SUPABASE_URL +
+// VITE_SUPABASE_ANON_KEY to switch to a real backend.
+const hasSupabaseCreds = Boolean(
+  import.meta.env.VITE_SUPABASE_URL && import.meta.env.VITE_SUPABASE_ANON_KEY,
+)
+export const MOCK_MODE =
+  import.meta.env.VITE_MOCK_MODE === 'true' || !hasSupabaseCreds
+
+// Loud signal so an unconfigured deploy is never mistaken for a live backend.
+if (MOCK_MODE && import.meta.env.VITE_MOCK_MODE !== 'true') {
+  console.warn(
+    '[StylzzByCliff] Running in MOCK/preview mode — no Supabase credentials found. ' +
+    'Set VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY to connect a real backend.',
+  )
+}
 
 // ─── Helpers ──────────────────────────────────────────────────────
 const daysAgo = (n) => {
