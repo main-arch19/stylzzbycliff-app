@@ -201,3 +201,86 @@ curl -X POST "$SUPABASE_URL/functions/v1/send-broadcast" \
 > Compliance: bulk mail should carry an unsubscribe path + the shop's name. The
 > function adds a "Reply STOP to opt out" footer; a real `email_opt_out` flag on
 > `profiles` (filtered in the recipient query) is the proper fast-follow.
+
+---
+
+## Custom booking engine (Phase 4)
+
+Customers book directly on the marketing website. Bookings land in the **same
+`appointments` table**, so they inherit completion → `log_cut` (XP/streak/tier),
+payments, push, reminders, and the dashboard — one system for web + app.
+
+Migrations: `012_availability.sql` (schedules, exceptions, barber↔service,
+settings, no-overlap guard), `013_booking_rpcs.sql` (slot engine + booking RPCs),
+`014_booking_ops.sql` (audit log, hold expiry, Google sync dispatch, cron).
+
+Functions:
+
+```
+create-booking/            Public: validate + bot-check + create_booking RPC
+send-booking-confirmation/ Customer confirmation (push if account, email always)
+google-sync/               One-way DB → barber's Google Calendar
+create-payment/            Extended: type='deposit' (guest, via booking_token)
+_shared/cors.ts            CORS + Turnstile helpers for public endpoints
+```
+
+### 1. Configure the shop
+
+```sql
+-- One row already seeded; tune to taste.
+update booking_settings set
+  timezone = 'America/New_York',
+  min_notice_min = 60, max_advance_days = 60,
+  slot_granularity_min = 15, hold_minutes = 15, cancel_window_hours = 24;
+
+-- Per-barber weekly hours (weekday 0=Sun..6=Sat) and which services they do.
+insert into barber_schedules (barber_id, weekday, start_time, end_time)
+  values ('<barber-uuid>', 2, '09:00', '17:00');     -- Tuesday 9–5
+insert into barber_services (barber_id, service_id)
+  values ('<barber-uuid>', '<service-uuid>');
+-- Optional per-service cleanup buffer:
+update services set buffer_min = 10 where id = '<service-uuid>';
+```
+
+### 2. Secrets + deploy
+
+```bash
+supabase secrets set \
+  WEBSITE_ORIGIN='https://stylzzbycliff.com' \
+  WEBSITE_URL='https://stylzzbycliff.com' \
+  TURNSTILE_SECRET='0x...' \
+  GOOGLE_OAUTH_CLIENT_ID='...' GOOGLE_OAUTH_CLIENT_SECRET='...'
+
+supabase db push
+supabase functions deploy create-booking            --no-verify-jwt
+supabase functions deploy create-payment            --no-verify-jwt   # guest deposit path
+supabase functions deploy send-booking-confirmation --no-verify-jwt
+supabase functions deploy google-sync               --no-verify-jwt
+```
+
+`app.functions_url` / `app.service_role_key` (set once in the Web Push section
+above) also drive the booking confirmation + Google-sync dispatch triggers.
+Until they're set, those side effects are silent no-ops and bookings still work.
+
+### 3. Website flow
+
+1. `GET` services (anon read) + `rpc('get_available_slots', { p_service_id, p_date })`
+   to render open times.
+2. `POST create-booking` with `{ service_id, starts_at, customer_name,
+   customer_email, customer_phone?, barber_id?, idempotency_key, turnstile_token }`.
+   - No-deposit service → `status: 'confirmed'`, customer gets confirmation, done.
+   - Deposit service → `status: 'pending'` + a `booking_token`; then
+     `POST create-payment { type:'deposit', booking_token }` → redirect to the
+     Checkout `url`. The webhook flips the appointment to `confirmed` on payment.
+3. Abandoned deposits auto-cancel after `hold_minutes` (cron `expire-pending-bookings`).
+
+### 4. Google Calendar (one-way)
+
+Store each barber's OAuth refresh token in `barber_google_tokens` (do the OAuth
+consent flow once; offline access / refresh token). Confirm/reschedule/cancel
+then mirror to their calendar automatically via the dispatch trigger.
+
+### 5. Verify
+
+See `docs/booking-verification.sql` for an end-to-end smoke test (seed hours,
+check the slot engine, prove double-booking is rejected, run the hold sweep).
